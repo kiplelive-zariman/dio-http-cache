@@ -11,13 +11,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  quiver: ^2.0.3
+  quiver: ^3.0.0
   json_serializable: ^3.0.0
   json_annotation: ^3.0.0
-  dio: ^3.0.1
-  sqflite: ^1.1.6+3
-  path: ^1.6.2
-  crypto: ^2.1.1+1
+  dio: ^4.0.0-prev1
+  sqflite: ^2.0.0+3
+  path: ^1.8.0
+  crypto: ^3.0.0
 
 dev_dependencies:
   flutter_test:
