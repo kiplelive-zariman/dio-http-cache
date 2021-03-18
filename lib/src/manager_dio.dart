@@ -50,7 +50,7 @@ class DioCacheManager {
       return _buildResponse(
           responseDataFromCache, responseDataFromCache.statusCode, options);
     }
-    return options;
+    handler.next(options);
   }
 
   void _onResponse(
@@ -61,6 +61,8 @@ class DioCacheManager {
         response.statusCode! < 300) {
       await _pushToCache(response);
     }
+    handler.next(response);
+
     // return response;
   }
 
@@ -72,6 +74,7 @@ class DioCacheManager {
         handler.resolve(_buildResponse(responseDataFromCache,
             responseDataFromCache.statusCode, e.requestOptions));
     }
+    handler.next(e);
 
     // return e;
   }

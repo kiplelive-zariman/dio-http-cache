@@ -3,8 +3,8 @@ import 'package:dio_http_cache/src/manager_dio.dart';
 
 /// try to get maxAge and maxStale from response headers.
 /// local settings will always overview the value get from service.
-Options buildServiceCacheOptions(
-        {Options? options,
+RequestOptions buildServiceCacheOptions(
+        {RequestOptions? options,
         Duration? maxStale,
         String? primaryKey,
         String? subKey,
@@ -17,11 +17,11 @@ Options buildServiceCacheOptions(
         forceRefresh: forceRefresh);
 
 /// build a normal cache options
-Options buildCacheOptions(Duration maxAge,
+RequestOptions buildCacheOptions(Duration maxAge,
         {Duration? maxStale,
         String? primaryKey,
         String? subKey,
-        Options? options,
+        RequestOptions? options,
         bool? forceRefresh}) =>
     buildConfigurableCacheOptions(
         maxAge: maxAge,
@@ -33,33 +33,33 @@ Options buildCacheOptions(Duration maxAge,
 
 /// if null==maxAge, will try to get maxAge and maxStale from response headers.
 /// local settings will always overview the value get from service.
-Options buildConfigurableCacheOptions(
-    {Options? options,
+RequestOptions buildConfigurableCacheOptions(
+    {RequestOptions? options,
     Duration? maxAge,
     Duration? maxStale,
     String? primaryKey,
     String? subKey,
     bool? forceRefresh}) {
   if (null == options) {
-    options = Options();
+    options = RequestOptions(path: "");
   } else if (options.responseType == ResponseType.stream) {
     throw Exception("ResponseType.stream is not supported");
   }
-  options.extra!.addAll({DIO_CACHE_KEY_TRY_CACHE: true});
+  options.extra.addAll({DIO_CACHE_KEY_TRY_CACHE: true});
   if (null != maxAge) {
-    options.extra!.addAll({DIO_CACHE_KEY_MAX_AGE: maxAge});
+    options.extra.addAll({DIO_CACHE_KEY_MAX_AGE: maxAge});
   }
   if (null != maxStale) {
-    options.extra!.addAll({DIO_CACHE_KEY_MAX_STALE: maxStale});
+    options.extra.addAll({DIO_CACHE_KEY_MAX_STALE: maxStale});
   }
   if (null != primaryKey) {
-    options.extra!.addAll({DIO_CACHE_KEY_PRIMARY_KEY: primaryKey});
+    options.extra.addAll({DIO_CACHE_KEY_PRIMARY_KEY: primaryKey});
   }
   if (null != subKey) {
-    options.extra!.addAll({DIO_CACHE_KEY_SUB_KEY: subKey});
+    options.extra.addAll({DIO_CACHE_KEY_SUB_KEY: subKey});
   }
   if (null != forceRefresh) {
-    options.extra!.addAll({DIO_CACHE_KEY_FORCE_REFRESH: forceRefresh});
+    options.extra.addAll({DIO_CACHE_KEY_FORCE_REFRESH: forceRefresh});
   }
   return options;
 }
