@@ -48,7 +48,7 @@ class DioCacheManager {
     var responseDataFromCache = await _pullFromCacheBeforeMaxAge(options);
     if (null != responseDataFromCache) {
       return _buildResponse(
-          responseDataFromCache, responseDataFromCache?.statusCode, options);
+          responseDataFromCache, responseDataFromCache.statusCode, options);
     }
     return options;
   }
@@ -70,7 +70,7 @@ class DioCacheManager {
           await _pullFromCacheBeforeMaxStale(e.requestOptions);
       if (null != responseDataFromCache)
         handler.resolve(_buildResponse(responseDataFromCache,
-            responseDataFromCache?.statusCode, e.requestOptions));
+            responseDataFromCache.statusCode, e.requestOptions));
     }
 
     // return e;
@@ -182,7 +182,8 @@ class DioCacheManager {
     callback(_maxAge, maxStale);
   }
 
-  Duration? _tryGetDurationFromMap(Map<String, String>? parameters, String key) {
+  Duration? _tryGetDurationFromMap(
+      Map<String, String>? parameters, String key) {
     if (null != parameters && parameters.containsKey(key)) {
       var value = int.tryParse(parameters[key]!);
       if (null != value && value >= 0) {
@@ -216,10 +217,10 @@ class DioCacheManager {
         : _getSubKeyFromUri(options.uri, data: options.data);
   }
 
-  String _getPrimaryKeyFromUri(Uri uri) => "${uri?.host}${uri?.path}";
+  String _getPrimaryKeyFromUri(Uri uri) => "${uri.host}${uri.path}";
 
   String _getSubKeyFromUri(Uri uri, {dynamic data}) =>
-      "${data?.toString()}_${uri?.query}";
+      "${data?.toString()}_${uri.query}";
 
   /// delete local cache by primaryKey and optional subKey
   Future<bool>? delete(String primaryKey,
