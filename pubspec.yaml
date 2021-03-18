@@ -12,9 +12,9 @@ dependencies:
   flutter:
     sdk: flutter
   quiver: ^3.0.0
-  json_serializable: ^3.0.0
-  json_annotation: ^3.0.0
-  dio: ^4.0.0-prev1
+  json_serializable: ^4.0.3
+  json_annotation: ^4.0.0
+  dio: ^4.0.0-prev2
   sqflite: ^2.0.0+3
   path: ^1.8.0
   crypto: ^3.0.0
